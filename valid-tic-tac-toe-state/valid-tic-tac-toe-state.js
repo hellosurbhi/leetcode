@@ -1,9 +1,4 @@
-/**
- * @param {string[]} board
- * @return {boolean}
- */
 var validTicTacToe = function(board) {
-      console.log('board: ', board)
     
 const winningPositions = [
   //left to right
@@ -17,67 +12,40 @@ const winningPositions = [
   //diagonals
   [0, 4, 8],
   [2, 4, 6],
-]
+];
 
 let xCount = 0;
-let yCount = 0;
+let oCount = 0;
 let xPositions = [];
-let yPositions = [];
+let oPositions = [];
     
-let tttString = board.join('')
-console.log('tttString: ', tttString)
-    
-
+let tttString = board.join('');
+ 
     for (let i = 0; i < tttString.length; i++) {
-        let thisT = tttString[i] 
+        let thisT = tttString[i]; 
         if (thisT === 'X') {
-            xPositions.push(i)
-            xCount++
+            xPositions.push(i);
+            xCount++;
         } else if (thisT === 'O') {
-            yCount++
-            yPositions.push(i)
+            oCount++;
+            oPositions.push(i);
         }
-        
     }
     
-    console.log('xCount: ', xCount)
-    console.log('yCount: ', yCount)
-    console.log('xPositions: ', xPositions)
-    console.log('yPositions', yPositions)
-    
-    let diff = xCount - yCount
-    
-    console.log('diff: ', diff)
+    let diff = xCount - oCount;
     
     if (diff > 1 || diff < 0) {
-        console.log('inside if', diff !== 1 || diff !== 0)
-        return false 
+        return false;
     }
     
-    let xWins = winningPositions.some((e) => e.every(f => xPositions.includes(f)))
-    let yWins = winningPositions.some((e) => e.every(f => yPositions.includes(f)))
+    let xWins = winningPositions.some((e) => e.every(f => xPositions.includes(f)));
+    let oWins = winningPositions.some((e) => e.every(f => oPositions.includes(f)));
     
-    console.log('first param', xWins)            
-    console.log('second param', yWins)
-    console.log('conditional', xWins ^ yWins)
-            
-    
-    if (xWins && yWins) {
-        console.log('inside second if')
-        return false
-    } else if (xWins && diff === 0 || yWins && diff === 1) {
-        return false
+    if (xWins && oWins) {
+        return false;
+    } else if (xWins && diff === 0 || oWins && diff === 1) {
+        return false;
     } else {
-                console.log('inside second else')
-        return true
+        return true;
     }
-
-        
-        //winningPositions.some((e) => e.every(f => xPositions.includes(f)))
-        
-        
-        //let checker = (arr, target) => target.every(v => arr.includes(v));
-        //array.some((element) => element % 2 === 0)
-    
 };
-
