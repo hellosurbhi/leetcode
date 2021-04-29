@@ -4,19 +4,16 @@
  * @return {number[]}
  */
 var twoSum = function(nums, target) {
+    const previousValues = {}
     
-    let array = []
-    for (let i = 0; i < nums.length; i++) {
-        let thisNum = nums[i]
-        
-        for (let j = 0; j < array.length; j++) {
-            console.log(thisNum, array[j], target)
-            if (thisNum + array[j] === target) {
-                return [i, nums.indexOf(array[j])]
-            }
+    for (let i =0; i < nums.length; i++) {
+        const currentNumber = nums[i]
+        const neededValue = target - currentNumber
+        const index2 = previousValues[neededValue]
+        if (index2 != null) {
+            return [i, index2]
+        } else {
+            previousValues[currentNumber] = i
         }
-        array.push(thisNum)
-        console.log(array)
     }
-    
 };
